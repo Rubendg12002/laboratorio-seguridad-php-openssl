@@ -1,83 +1,247 @@
+#  Laboratorio: Seguridad en PHP con OpenSSL
 
-## ![Seguridad](https://img.shields.io/badge/Código-Seguro-green?style=flat&logo=github&logoColor=white) Seguridad con OpenSSL en PHP
-OpenSSL es una biblioteca criptográfica que permite una implementación de código abierto de los protocolos de seguridad de la capa de transporte (TLS) y capa de sockets seguros (SSL). Proporciona funciones para generar claves privadas, administrar certificados y equipar aplicaciones cliente con cifrado y descifrado.
+##  Descripción
 
-## 🌐 Tecnologías utilizadas  
+Este laboratorio tiene como objetivo implementar y documentar funciones criptográficas utilizando la biblioteca OpenSSL en PHP.
 
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) 
-![Apache](https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white) 
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) 
-![XAMPP](https://img.shields.io/badge/XAMPP-F37623?style=for-the-badge&logo=xampp&logoColor=white) 
-![WampServer](https://img.shields.io/badge/WampServer-FF0040?style=for-the-badge&logo=windows&logoColor=white)
+Se realizaron pruebas de:
+
+- Firma digital
+- Verificación de firmas
+- Generación de certificados
+- Cifrado simétrico AES-128-CBC
+- Encriptación básica con OpenSSL
+
+---
+
+# 👨‍💻 Estudiante
+
+- Nombre: Ruben Dominguez 
+- Universidad Tecnológica de Panamá
+- Facultad de Ingeniería de Sistemas Computacionales
+- Desarrollo Web VII – PHP y MySQL
+- Docente: Ing. Irina Fong
+
+---
+
+#  Objetivo
+
+Aplicar el uso de OpenSSL en PHP para comprender el funcionamiento de las funciones criptográficas mediante ejemplos prácticos de cifrado, firma digital y verificación.
+
+---
+
+# 🛠 Tecnologías utilizadas
+
+- PHP
+- OpenSSL
+- XAMPP
+- HTML5
+- CSS3
+
+---
+
+#  Archivos del proyecto
+
+| Archivo | Descripción |
+|---|---|
+| encriptacion.php | Sistema web de cifrado AES-128-CBC |
+| firma7.php | Firma digital y verificación RSA |
+| firmaOtra.php | Generación de certificado X.509 |
+| firmaMensaje.php | Firma y verificación de mensajes |
+| cifrado_simple.php | Ejemplo de cifrado básico |
+
+---
+
+#  Funciones criptográficas utilizadas
+
+## 1. openssl_encrypt()
+
+### Propósito
+Cifrar información utilizando algoritmos criptográficos.
+
+### Parámetros
+- Texto a cifrar
+- Método de cifrado
+- Clave secreta
+- Opciones
+- IV
+
+### Retorno
+Devuelve el texto cifrado.
+
+---
+
+## 2. openssl_decrypt()
+
+### Propósito
+Descifrar información previamente cifrada.
+
+### Parámetros
+- Texto cifrado
+- Método
+- Clave
+- Opciones
+- IV
+
+### Retorno
+Texto original descifrado.
+
+---
+
+## 3. openssl_random_pseudo_bytes()
+
+### Propósito
+Generar bytes aleatorios criptográficamente seguros para IV.
+
+### Parámetros
+- Cantidad de bytes
+
+### Retorno
+Bytes aleatorios.
+
+---
+
+## 4. openssl_sign()
+
+### Propósito
+Crear una firma digital utilizando una clave privada.
+
+### Parámetros
+- Datos
+- Variable firma
+- Clave privada
+- Algoritmo
+
+### Retorno
+TRUE o FALSE.
+
+---
+
+## 5. openssl_verify()
+
+### Propósito
+Verificar una firma digital usando una clave pública.
+
+### Parámetros
+- Datos originales
+- Firma
+- Clave pública
+- Algoritmo
+
+### Retorno
+- 1 = Firma válida
+- 0 = Firma inválida
+- -1 = Error
+
+---
+
+## 6. openssl_pkey_new()
+
+### Propósito
+Generar un nuevo par de llaves pública y privada.
+
+### Parámetros
+- Configuración RSA
+
+### Retorno
+Recurso de clave.
+
+---
+
+## 7. openssl_csr_new()
+
+### Propósito
+Crear una solicitud de certificado (CSR).
+
+### Parámetros
+- Datos del certificado
+- Clave privada
+- Configuración
+
+### Retorno
+CSR generado.
+
+---
+
+## 8. openssl_csr_sign()
+
+### Propósito
+Firmar un certificado digital.
+
+### Parámetros
+- CSR
+- Certificado CA
+- Clave privada
+- Días válidos
+- Configuración
+
+### Retorno
+Certificado firmado.
+
+---
+
+#  Problemas encontrados
+
+## Problema
+La ruta del archivo openssl.cnf no funcionaba correctamente en algunos equipos.
+
+## Solución 1
+Eliminar la línea de configuración para permitir que XAMPP detecte automáticamente el archivo openssl.cnf.
+
+## Solución 2
+Usar rutas dinámicas compatibles con distintas instalaciones de XAMPP.
+
+---
+
+# 📸 Evidencias
+
+## Encriptación AES-128-CBC
+
+Agregar captura aquí:
+
+![Captura 1](capturas/captura1.png)
+
+---
+
+## Firma digital
+
+![Captura 2](capturas/captura2.png)
+
+---
+
+## Certificado X.509
+
+![Captura 3](capturas/captura3.png)
+---
+
+## Verificación de firma
 
 
+---
 
-### Los Algoritmos de Generación de clave más utlilizados y soportados son RSA, DSA y ECDSA
-Los algoritmos de generación de clave más utilizados y soportados son RSA, DSA y ECDSA.
+#  Explicación del proceso criptográfico
 
-### Aplicaciones de OpenSSL en Ciberseguridad 
-OpenSSL se utiliza ampliamente en el campo de la ciberseguridad para una amplia gama de aplicaciones, entre las que se incluyen:
+## Firma Digital
+La firma digital permite garantizar la autenticidad e integridad de un mensaje utilizando una clave privada y verificando con la clave pública.
 
-1. Seguridad del servidor web: OpenSSL se utiliza comúnmente para habilitar HTTPS (HTTP sobre SSL/TLS) en servidores web, proporcionando cifrado y autenticación para una comunicación segura entre clientes y servidores.<br>
+## Verificación
+Se utiliza la clave pública para comprobar que el mensaje no fue modificado.
 
-2. Seguridad del correo electrónico: OpenSSL se utiliza para proteger las comunicaciones de correo electrónico, permitiendo el uso de S/MIME (Secure/Multipurpose Internet Mail Extensions) y PGP (Pretty Good Privacy) para el cifrado de correo electrónico y firmas digitales.
+## Cifrado Simétrico
+AES-128-CBC cifra y descifra información usando la misma clave secreta compartida.
 
+---
 
+#  Conclusión
 
-### Configuración
-1. Instalar en la raíz C.(Evitar espacios en blanco)
-2. En la  versión de Xampp, verificar que tenga habilitada la extensión de extension=openssl
-   El php.ini deben abrirlo con WordPad o Bloc de Notas y buscar la línea ;extension=openssl --> si tiene ";" eliminarlo y bajar los servicios y luego levantarlos  
-3. Bajar la Versión Exe.
-4. En algunos ejemlos deben asegurarse de establecer la ruta dónde instalarón el OpenSSL --> openssl.cnf (Ubicación de OpenSSL en su PC)
-Ejemplo:
+Este laboratorio permitió comprender el funcionamiento práctico de OpenSSL en PHP, especialmente en procesos de cifrado, generación de certificados y firma digital.
 
-```bash
-   $configArgs = array(
-    'config' => 'C:\OpenSSL-Win64\bin\cnf\openssl.cnf', //<-- esta ruta es necesaria si trabajas con XAMPP
-    'private_key_bits' => 2048,
-    'private_key_type' => OPENSSL_KEYTYPE_RSA ); 
-```
+También se aprendió la importancia del uso de IV dinámicos, claves privadas y certificados para proteger la información y validar la autenticidad de los mensajes.
 
+---
 
-### Ejecutar los siguienstes ejemplos
-1. Encriptacion.php
-2. FirmaMensaje.php
-3. Firma7.php
-4. FirmaOtra.php
+#  Cómo ejecutar el proyecto
 
-**Editor de Código :** 
-- Visual Estudio Code
-
-## 🔢 Estadísticas
-
- ![Creado](https://img.shields.io/badge/Creado-08--04--2025-blue)
-![GitHub watchers](https://img.shields.io/github/watchers/Salomon2514/EjemplosJson.svg?style=social)
-![Visitas](https://visitor-badge.laobi.icu/badge?page_id=Salomon2514.SeguridadOpenSSL)
-
-## 📚 Cómo usar este repositorio
-
-1. Descarga o clona el repositorio, ubica una carpeta en www -> para WampServer o htdocs  si es Xampp
-  ```bash
-   [https://github.com/Salomon2514/SeguridadOpenSSL.git]
-2. Para correrlos edita el URL de su navegador:  http://127.1.1.1/Carpeta/ o  http://localhost/Carpeta/
-```
-
-## 👨‍🏫 Autor
-
-**Irina Fong**  
-Docente de Programación  
-Universidad Tecnológica de Panamá  
-
-📧 **Email:** irina.fong@utp.ac.pa  
-📧 **Email:** irinafong@gmail.com<br>
-🌐 **GitHub:**(https://github.com/Salomon2514)  
-
-
-## 📖 Referencias
-
-- [https://www.youtube.com/watch?v=cBa87N_BZ4s&t=40s]
-- [https://slproweb.com/products/Win32OpenSSL.html]
-
-
-
+1. Copiar la carpeta dentro de:
+```txt
+C:\xampp\htdocs\
