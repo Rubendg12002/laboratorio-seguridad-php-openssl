@@ -195,21 +195,31 @@ Usar rutas dinámicas compatibles con distintas instalaciones de XAMPP.
 
 # 📸 Evidencias
 
-## Encriptación AES-128-CBC
 
-Agregar captura aquí:
 
-![Captura 1](capturas/captura1.png)
+
+
+# 📸 Evidencias
+
+![Captura 1](https://raw.githubusercontent.com/Rubendg12002/laboratorio-seguridad-php-openssl/main/capturas/captura1.png)
 
 ---
 
-## Firma digital
+![Captura 2](https://raw.githubusercontent.com/Rubendg12002/laboratorio-seguridad-php-openssl/main/capturas/captura2.png)
+
+---
+
+![Captura 3](https://raw.githubusercontent.com/Rubendg12002/laboratorio-seguridad-php-openssl/main/capturas/captura3.png)
+
+---
+
+
 
 ![Captura 2](capturas/captura2.png)
 
 ---
 
-## Certificado X.509
+
 
 ![Captura 3](capturas/captura3.png)
 ---
