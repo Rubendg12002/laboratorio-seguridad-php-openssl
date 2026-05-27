@@ -1,36 +1,33 @@
-#  Laboratorio: Seguridad en PHP con OpenSSL
+Universidad Tecnológica de Panamá
+Facultad de Ingeniería de Sistemas Computacionales
+Licenciatura en desarrollo y gestión de software
 
-##  Descripción
+Desarrollo de software VII
 
-Este laboratorio tiene como objetivo implementar y documentar funciones criptográficas utilizando la biblioteca OpenSSL en PHP.
+Laboratorio: Seguridad en PHP con OpenSSL
 
-Se realizaron pruebas de:
+Autor: Ruben Dominguez
 
-- Firma digital
-- Verificación de firmas
-- Generación de certificados
-- Cifrado simétrico AES-128-CBC
-- Encriptación básica con OpenSSL
+Profesora: Irina Fong 
 
----
+27 de mayo del 2026 
 
-# 👨‍💻 Estudiante
 
-- Nombre: Ruben Dominguez 
-- Universidad Tecnológica de Panamá
-- Facultad de Ingeniería de Sistemas Computacionales
-- Desarrollo Web VII – PHP y MySQL
-- Docente: Ing. Irina Fong
+##  Introducción
+
+La seguridad informática es un aspecto fundamental en el desarrollo de aplicaciones web modernas, ya que permite proteger la confidencialidad, integridad y autenticidad de la información. En PHP, una de las herramientas más utilizadas para implementar mecanismos de seguridad es la biblioteca OpenSSL, la cual proporciona funciones criptográficas avanzadas para cifrado, generación de claves, firmas digitales y certificados.
+
+En este laboratorio se desarrollaron distintos ejemplos prácticos utilizando OpenSSL en PHP, enfocados en la generación de claves RSA, firmas digitales, verificación de mensajes y cifrado simétrico mediante el algoritmo AES-128-CBC. Además, se implementó una aplicación web interactiva capaz de cifrar y descifrar mensajes utilizando claves secretas y vectores de inicialización dinámicos.
 
 ---
 
 #  Objetivo
 
-Aplicar el uso de OpenSSL en PHP para comprender el funcionamiento de las funciones criptográficas mediante ejemplos prácticos de cifrado, firma digital y verificación.
+Aplicar funciones criptográficas utilizando la biblioteca OpenSSL en PHP, comprendiendo el funcionamiento del cifrado, la firma digital y la verificación de mensajes mediante ejemplos prácticos ejecutados localmente en un entorno XAMPP.
 
 ---
 
-# 🛠 Tecnologías utilizadas
+#  Tecnologías Utilizadas
 
 - PHP
 - OpenSSL
@@ -40,192 +37,209 @@ Aplicar el uso de OpenSSL en PHP para comprender el funcionamiento de las funcio
 
 ---
 
-#  Archivos del proyecto
-
-| Archivo | Descripción |
-|---|---|
-| encriptacion.php | Sistema web de cifrado AES-128-CBC |
-| firma7.php | Firma digital y verificación RSA |
-| firmaOtra.php | Generación de certificado X.509 |
-| firmaMensaje.php | Firma y verificación de mensajes |
-| cifrado_simple.php | Ejemplo de cifrado básico |
+#  Archivos del Proyecto
 
 ---
 
-#  Funciones criptográficas utilizadas
+##  encriptacion.php
 
-## 1. openssl_encrypt()
+Sistema web interactivo de cifrado simétrico utilizando el algoritmo AES-128-CBC con OpenSSL.
 
-### Propósito
-Cifrar información utilizando algoritmos criptográficos.
+###  Funciones utilizadas
+- openssl_random_pseudo_bytes()
+- openssl_encrypt()
+- openssl_decrypt()
 
-### Parámetros
-- Texto a cifrar
-- Método de cifrado
-- Clave secreta
-- Opciones
-- IV
+###  Propósito
+Permitir al usuario:
+- ingresar un mensaje
+- ingresar una clave secreta
+- cifrar el mensaje
+- descifrarlo automáticamente
 
-### Retorno
-Devuelve el texto cifrado.
+###  Explicación
+El sistema genera dinámicamente un Vector de Inicialización (IV) utilizando OpenSSL y posteriormente cifra el mensaje usando AES-128-CBC. Finalmente, el mensaje es descifrado automáticamente para comprobar la integridad de la información.
 
----
-
-## 2. openssl_decrypt()
-
-### Propósito
-Descifrar información previamente cifrada.
-
-### Parámetros
-- Texto cifrado
-- Método
-- Clave
-- Opciones
-- IV
-
-### Retorno
-Texto original descifrado.
+###  Código
+[Ver archivo](https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/blob/main/encriptacion.php)
 
 ---
 
-## 3. openssl_random_pseudo_bytes()
+##  firma7.php
 
-### Propósito
-Generar bytes aleatorios criptográficamente seguros para IV.
+Generación de claves RSA, firma digital y verificación de datos.
 
-### Parámetros
-- Cantidad de bytes
+###  Funciones utilizadas
+- openssl_pkey_new()
+- openssl_sign()
+- openssl_verify()
+- openssl_pkey_export()
 
-### Retorno
-Bytes aleatorios.
+###  Propósito
+Crear:
+- clave privada
+- clave pública
+- firma digital
+- verificación de autenticidad
 
----
+###  Explicación
+Este archivo genera un par de claves RSA y utiliza la clave privada para crear una firma digital. Posteriormente, la firma es verificada mediante la clave pública para garantizar que el mensaje no haya sido alterado.
 
-## 4. openssl_sign()
-
-### Propósito
-Crear una firma digital utilizando una clave privada.
-
-### Parámetros
-- Datos
-- Variable firma
-- Clave privada
-- Algoritmo
-
-### Retorno
-TRUE o FALSE.
+###  Código
+[Ver archivo](https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/blob/main/firma7.php)
 
 ---
 
-## 5. openssl_verify()
+##  firmaOtra.php
 
-### Propósito
-Verificar una firma digital usando una clave pública.
+Generación de certificado digital X.509 y llave privada.
 
-### Parámetros
-- Datos originales
-- Firma
-- Clave pública
-- Algoritmo
+###  Funciones utilizadas
+- openssl_csr_new()
+- openssl_csr_sign()
+- openssl_x509_export()
 
-### Retorno
-- 1 = Firma válida
-- 0 = Firma inválida
-- -1 = Error
-
----
-
-## 6. openssl_pkey_new()
-
-### Propósito
-Generar un nuevo par de llaves pública y privada.
-
-### Parámetros
-- Configuración RSA
-
-### Retorno
-Recurso de clave.
-
----
-
-## 7. openssl_csr_new()
-
-### Propósito
-Crear una solicitud de certificado (CSR).
-
-### Parámetros
-- Datos del certificado
-- Clave privada
-- Configuración
-
-### Retorno
-CSR generado.
-
----
-
-## 8. openssl_csr_sign()
-
-### Propósito
-Firmar un certificado digital.
-
-### Parámetros
+###  Propósito
+Crear:
+- certificado digital
 - CSR
-- Certificado CA
-- Clave privada
-- Días válidos
-- Configuración
+- llave privada RSA
 
-### Retorno
-Certificado firmado.
+###  Explicación
+Este archivo permite generar certificados digitales autofirmados utilizando OpenSSL. Los certificados son utilizados para validar identidades y proteger comunicaciones seguras.
 
----
-
-#  Problemas encontrados
-
-## Problema
-La ruta del archivo openssl.cnf no funcionaba correctamente en algunos equipos.
-
-## Solución 1
-Eliminar la línea de configuración para permitir que XAMPP detecte automáticamente el archivo openssl.cnf.
-
-## Solución 2
-Usar rutas dinámicas compatibles con distintas instalaciones de XAMPP.
+###  Código
+[Ver archivo](https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/blob/main/firmaOtra.php)
 
 ---
 
-# 📸 Evidencias
-![Captura 1](Capturas/captura1.png)
-![Captura 2](Capturas/captura2.png)
-![Captura 3](Capturas/captura3.png)
+##  firmaMensaje.php
+
+Firma y verificación de mensajes utilizando certificados digitales.
+
+###  Funciones utilizadas
+- openssl_sign()
+- openssl_verify()
+- openssl_pkey_get_private()
+- openssl_pkey_get_public()
+
+###  Propósito
+Firmar un mensaje y verificar que no haya sido alterado.
+
+###  Explicación
+El mensaje es firmado utilizando una clave privada y posteriormente verificado mediante el certificado público. Esto garantiza autenticidad e integridad de la información.
+
+###  Código
+[Ver archivo](https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/blob/main/firmaMensaje.php)
+
+---
+
+##  cifrado_simple.php
+
+Ejemplo básico de cifrado usando OpenSSL y AES-256-CBC.
+
+###  Funciones utilizadas
+- openssl_encrypt()
+- hash_hmac()
+
+###  Propósito
+Realizar un cifrado básico de texto utilizando una clave y un HMAC de integridad.
+
+###  Explicación
+Se realiza un cifrado utilizando AES-256-CBC y posteriormente se genera un hash HMAC para validar la integridad del mensaje cifrado.
+
+###  Código
+[Ver archivo](https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/blob/main/cifrado_simple.php)
+
+---
+
+#  Carpeta keys/
+
+Contiene:
+- private_key.pem
+- public_key.pem
+- signature.dat
+
+###  Propósito
+Guardar:
+- llaves RSA
+- firmas digitales
+
+###  Carpeta
+https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/tree/main/keys
+
+---
+
+#  Carpeta keysCert/
+
+Contiene:
+- certout.csr
+- privkey.pem
+
+###  Propósito
+Guardar:
+- certificados digitales
+- claves privadas
+
+###  Carpeta
+https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/tree/main/keysCert
+
+---
+
+#  Carpeta Capturas/
+
+Contiene evidencias gráficas de:
+- ejecución de scripts
+- cifrado
+- firmas digitales
+- certificados generados
+
+###  Carpeta
+https://github.com/Rubendg12002/laboratorio-seguridad-php-openssl/tree/main/Capturas
+
+---
+
+#  Problemas Encontrados
+
+Durante el desarrollo del laboratorio algunos equipos presentaron problemas con la ruta del archivo `openssl.cnf`.
+
+##  Solución 1
+Eliminar la ruta fija del archivo `.cnf` para permitir que XAMPP detecte automáticamente la configuración de OpenSSL.
+
+##  Solución 2
+Utilizar rutas dinámicas compatibles con distintas instalaciones de XAMPP.
+
+---
+
+#  Evidencias
+
+<img width="200" height="100" alt="captura1" src="https://github.com/user-attachments/assets/cde5b718-fe1a-41c7-a925-4cbf4f7733f8" />
 
 
+<img width="407" height="200" alt="captura2" src="https://github.com/user-attachments/assets/e6217a02-52e4-4bf3-96f0-1dc91e9517f3" />
 
 
+<img width="1356" height="234" alt="captura3" src="https://github.com/user-attachments/assets/1a4d0ff6-aeef-4426-bca2-0970aec0bdb7" />
 
 
-#  Explicación del proceso criptográfico
+---
 
-## Firma Digital
-La firma digital permite garantizar la autenticidad e integridad de un mensaje utilizando una clave privada y verificando con la clave pública.
+#  Resultados Obtenidos
 
-## Verificación
-Se utiliza la clave pública para comprobar que el mensaje no fue modificado.
+Se logró ejecutar correctamente:
 
-## Cifrado Simétrico
-AES-128-CBC cifra y descifra información usando la misma clave secreta compartida.
+- Generación de claves RSA
+- Firma digital
+- Verificación de firmas
+- Creación de certificados
+- Cifrado y descifrado AES-128-CBC
+
+Además, se verificó el correcto funcionamiento de OpenSSL dentro del entorno local XAMPP.
 
 ---
 
 #  Conclusión
 
-Este laboratorio permitió comprender el funcionamiento práctico de OpenSSL en PHP, especialmente en procesos de cifrado, generación de certificados y firma digital.
+Este laboratorio permitió comprender la importancia de la criptografía en el desarrollo de aplicaciones web seguras. A través de OpenSSL en PHP se implementaron mecanismos de cifrado, generación de certificados y firmas digitales que garantizan la protección y autenticidad de la información.
 
-También se aprendió la importancia del uso de IV dinámicos, claves privadas y certificados para proteger la información y validar la autenticidad de los mensajes.
-
----
-
-#  Cómo ejecutar el proyecto
-
-1. Copiar la carpeta dentro de:
-```txt
-C:\xampp\htdocs\
+También se fortalecieron conocimientos sobre claves públicas y privadas, algoritmos de cifrado y verificación de integridad de mensajes, elementos fundamentales en la seguridad informática moderna.
